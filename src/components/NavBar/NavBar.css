@@ -1,0 +1,57 @@
+:root {
+    --primary-color: #910f0f;
+    --secondary-color: #700b0b;
+}
+
+img {
+    width: 15vh;
+    height: 100%;
+}
+
+nav {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: #910f0f;
+    color: rgb(255, 255, 255);
+    display: flex;
+}
+
+.container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+ul {
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    cursor: pointer;
+}
+
+li:hover {
+    color: rgba(0, 0, 0, 0.89);
+}
+
+button {
+    margin-left: 1rem;
+}
+.icon-cart {
+    text-decoration: none;
+    color: white;
+    width: 5vh;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
