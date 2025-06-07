@@ -1,9 +1,9 @@
 .loader {
-    position: relative;
+    position: absolute;
     border: 24px solid #0000;
     border-radius: 50%;
     animation: piefill 0.5s linear infinite;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 @keyframes piefill {

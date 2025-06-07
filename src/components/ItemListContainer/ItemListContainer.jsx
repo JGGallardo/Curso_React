@@ -6,28 +6,39 @@ import Loader from "../Loader/Loader.jsx";
 import { useParams } from "react-router";
 
 function ItemListContainer() {
+    const [allProducts, setAllProducts] = useState([]);
     const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+
     const { categoria } = useParams();
 
+    const filterProducts = (arrayProducts, category) => {
+        if (category) {
+            setProducts(arrayProducts.filter((el) => el.categoria === categoria));
+        } else {
+            setProducts(arrayProducts);
+        }
+    };
+
     useEffect(() => {
-        setLoading(true);
-        getProducts()
-            .then((result) => {
-                const filteredProducts = categoria
-                    ? result.filter((product) => product.categoria === categoria)
-                    : result;
-                setProducts(filteredProducts);
-                setLoading(false);
-            })
-            .catch((err) => {
-                alert(err);
-                setLoading(false);
-            });
+        if (allProducts.length === 0) {
+            setLoading(true);
+            getProducts()
+                .then((result) => {
+                    setAllProducts(result);
+                    filterProducts(result, categoria);
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    alert(err);
+                });
+        } else {
+            filterProducts(allProducts, categoria);
+        }
     }, [categoria]);
 
     return (
-        <div className="item-list-container">
+        <div className="item-list-container loader-position">
             {loading ? (
                 <Loader />
             ) : products.length > 0 ? (
