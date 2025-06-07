@@ -2,7 +2,11 @@
     --primary-color: #910f0f;
     --secondary-color: #700b0b;
 }
-
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+}
 img {
     width: 15vh;
     height: 100%;
@@ -14,7 +18,7 @@ nav {
     left: 0;
     width: 100%;
     z-index: 1;
-    background-color: #910f0f;
+    background-color: var(--primary-color);
     color: rgb(255, 255, 255);
     display: flex;
 }
@@ -25,6 +29,7 @@ nav {
     justify-content: space-between;
     width: 100%;
     padding: 0 1rem;
+    background-color: var(--primary-color);
 }
 
 ul {

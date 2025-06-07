@@ -1,0 +1,30 @@
+.loader {
+    position: relative;
+    border: 24px solid #0000;
+    border-radius: 50%;
+    animation: piefill 0.5s linear infinite;
+    margin-top: 30px;
+}
+
+@keyframes piefill {
+    0%,
+    19% {
+        border-color: #0000 #0000 #0000 #0000;
+    }
+    20%,
+    39% {
+        border-color: #fd000094 #0000 #0000 #0000;
+    }
+    40%,
+    59% {
+        border-color: #ff0000a6 #ff00005d #0000 #0000;
+    }
+    60%,
+    79% {
+        border-color: #ff0000b7 #ff000093 #ff0000 #0000;
+    }
+    80%,
+    100% {
+        border-color: #ff0000 #ff0000c7 #ff00009f #ff0000c7;
+    }
+}

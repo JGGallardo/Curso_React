@@ -1,12 +1,14 @@
 import "./NavBar.css";
-import logo from "../../assets/img/image.png";
+import logo from "/assets/img/image.png";
+import CartWidget from "../CartWidget/CartWidget";
 import { BsFillCartFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 function NavBar() {
     return (
         <nav className="navbar">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">
+                <Link to="/" className="navbar-brand" href="#">
                     <img
                         src={logo}
                         alt="Logo"
@@ -14,16 +16,25 @@ function NavBar() {
                         height="24"
                         className="d-inline-block align-text-top"
                     />
-                </a>
+                </Link>
                 <ul>
-                    <li>Pizzas</li>
-                    <li>Paninis</li>
-                    <li>Bebidas</li>
+                    <li>
+                        <Link to="/">Productos</Link>
+                    </li>
+                    <li>
+                        <Link to="/categoria/Pizzas">Pizzas</Link>
+                    </li>
+                    <li>
+                        <Link to="/categoria/Paninis">Paninis</Link>
+                    </li>
+                    <li>
+                        <Link to="/categoria/Bebidas">Bebidas</Link>
+                    </li>
+                    <li>
+                        <Link to="/contacto">Contacto</Link>
+                    </li>
                 </ul>
-                <a className="icon-cart">
-                    <BsFillCartFill className="icon-cart" />
-                    <p>3</p>
-                </a>
+                <CartWidget cantidad={2} />
             </div>
         </nav>
     );
