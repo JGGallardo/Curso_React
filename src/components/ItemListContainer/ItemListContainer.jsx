@@ -1,9 +1,12 @@
 import "./ItemListContainer.css";
 import Item from "../Item/Item.jsx";
-import getProducts from "../../services/mockService";
+// import getProducts from "../../services/mockService";
 import { useState, useEffect } from "react";
 import Loader from "../Loader/Loader.jsx";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { db } from "../../firebaseConfig.js";
+import { addDoc, collection, getDocs } from "firebase/firestore";
+import { useAppContext } from "../../context/context.jsx";
 
 function ItemListContainer() {
     const [allProducts, setAllProducts] = useState([]);
@@ -12,26 +15,36 @@ function ItemListContainer() {
 
     const { categoria } = useParams();
 
+    const productosCollection = collection(db, "productos");
+    const ordenesCollection = collection(db, "ordenes");
+
+    const { carrito, limpiarCarrito } = useAppContext();
+
+    const navigate = useNavigate();
+
     const filterProducts = (arrayProducts, category) => {
         if (category) {
-            setProducts(arrayProducts.filter((el) => el.categoria === categoria));
+            setProducts(
+                arrayProducts
+                    .filter((el) => el.categoria === categoria)
+                    .sort((a, b) => Number(a.id) - Number(b.id))
+            );
         } else {
-            setProducts(arrayProducts);
+            setProducts(arrayProducts.sort((a, b) => Number(a.id) - Number(b.id)));
         }
     };
 
     useEffect(() => {
         if (allProducts.length === 0) {
             setLoading(true);
-            getProducts()
-                .then((result) => {
-                    setAllProducts(result);
-                    filterProducts(result, categoria);
+            getDocs(productosCollection)
+                .then((snapshot) => {
+                    const arrayDeProductos = snapshot.docs.map((el) => el.data());
+                    setAllProducts(arrayDeProductos);
+                    filterProducts(arrayDeProductos, categoria);
                     setLoading(false);
                 })
-                .catch((err) => {
-                    alert(err);
-                });
+                .catch((err) => console.error(err));
         } else {
             filterProducts(allProducts, categoria);
         }

@@ -6,7 +6,7 @@ function getProducts() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(products);
-        }, 700);
+        }, 200);
     });
 }
 

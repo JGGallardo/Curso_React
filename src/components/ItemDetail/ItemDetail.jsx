@@ -4,11 +4,34 @@ import { useEffect, useState } from "react";
 import getProducts from "../../services/mockService";
 import Loader from "../Loader/Loader";
 import Contador from "../Contador/Contador";
+import { useAppContext } from "../../context/context";
 
 function ItemDetail() {
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [producto, setProducto] = useState({});
+
+    const { agregarAlCarrito } = useAppContext();
+
+    const [cantidad, setCantidad] = useState(1);
+
+    function restarCantidad() {
+        if (cantidad > 1) {
+            setCantidad(cantidad - 1);
+        }
+    }
+
+    function sumarCantidad() {
+        if (cantidad < 10) {
+            setCantidad(cantidad + 1);
+        }
+    }
+
+    function agregarCantidadAlCarrito() {
+        const { id, precio, nombre, imagen } = producto;
+        agregarAlCarrito({ id, precio, nombre, imagen, cantidad });
+        setCantidad(1);
+    }
 
     useEffect(() => {
         getProducts()
@@ -37,7 +60,6 @@ function ItemDetail() {
             </div>
             <div className="card-content">
                 <h3 className="card-title">{producto.nombre}</h3>
-                <p className="card-description">{producto.text || producto.descripcion}</p>
                 {producto.ingredientes && (
                     <ul>
                         Ingredientes:
@@ -46,9 +68,6 @@ function ItemDetail() {
                         ))}
                     </ul>
                 )}
-                {producto.stock !== undefined && (
-                    <p className="card-description">Quedan {producto.stock} unidades en stock!</p>
-                )}
                 <p className="card-description">Categoría: {producto.categoria}</p>
                 <div>
                     <p className="card-price">$ {producto.precio}</p>
@@ -56,8 +75,14 @@ function ItemDetail() {
                 <Link to="/">
                     <button className="card-button">Volver al inicio</button>
                 </Link>
-                <Contador />
-                <button className="card-button">Agregar al carrito</button>
+                <Contador
+                    cantidad={cantidad}
+                    sumarCantidad={sumarCantidad}
+                    restarCantidad={restarCantidad}
+                />
+                <button className="card-button" onClick={agregarCantidadAlCarrito}>
+                    Agregar al carrito
+                </button>
             </div>
         </div>
     ) : (

@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import "./Item.css";
 import Contador from "../Contador/Contador";
+import { useAppContext } from "../../context/context";
+
 function Item({ id, precio, nombre, imagen }) {
+    const { agregarAlCarrito } = useAppContext();
+
     return (
         <div className="card">
             <div className="card-image-container">
@@ -17,10 +21,9 @@ function Item({ id, precio, nombre, imagen }) {
                 </Link>
                 <button
                     className="card-button"
-                    onClick={() => console.log("Producto", nombre, "agregado al carrito")}>
+                    onClick={() => agregarAlCarrito({ id, precio, nombre, imagen, cantidad: 1 })}>
                     Agregar al carrito
                 </button>
-                <Contador />
             </div>
         </div>
     );

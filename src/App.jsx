@@ -3,29 +3,23 @@ import ItemListContainer from "./components/ItemListContainer/ItemListContainer"
 import NavBar from "./components/NavBar/NavBar";
 import "./App.css";
 import ItemDetail from "./components/ItemDetail/ItemDetail";
+import NotFound from "./components/NotFound/NotFound";
+import { ContextProvider } from "./context/context";
+import Cart from "./components/Cart/Cart";
 
 function App() {
     return (
-        <>
+        <ContextProvider>
             <NavBar />
             <Routes>
                 <Route path="/" element={<ItemListContainer />} />
                 <Route path="/categoria/:categoria" element={<ItemListContainer />} />
                 <Route path="/detalle/:id" element={<ItemDetail />} />
                 <Route path="/contacto" element={<p>Seccion de Contacto</p>} />
-                <Route
-                    path="*"
-                    element={
-                        <div style={{ textAlign: "center", marginTop: "50px" }}>
-                            <h2>Página no encontrada</h2>
-                            <Link to="/">
-                                <button>Volver al inicio</button>
-                            </Link>
-                        </div>
-                    }
-                />
+                <Route path="/carrito" element={<Cart />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
-        </>
+        </ContextProvider>
     );
 }
 
