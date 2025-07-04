@@ -1,13 +1,22 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
+const {
+    VITE_FIREBASE_API_KEY,
+    VITE_FIREBASE_AUTH_DOMAIN,
+    VITE_FIREBASE_PROJECT_ID,
+    VITE_FIREBASE_STORAGE_BUCKET,
+    VITE_FIREBASE_MESSAGING_SENDER_ID,
+    VITE_FIREBASE_APP_ID,
+} = import.meta.env;
+
 const firebaseConfig = {
-    apiKey: "AIzaSyDvptYdR5mXkejIGmjxzgffrY2IDJRuH5U",
-    authDomain: "paginaweb-ivrea.firebaseapp.com",
-    projectId: "paginaweb-ivrea",
-    storageBucket: "paginaweb-ivrea.firebasestorage.app",
-    messagingSenderId: "370842530588",
-    appId: "1:370842530588:web:923d759d8890b5ac1940d9",
+    apiKey: VITE_FIREBASE_API_KEY,
+    authDomain: VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: VITE_FIREBASE_PROJECT_ID,
+    storageBucket: VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);

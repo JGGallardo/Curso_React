@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { toast } from "react-toastify";
 
 // 1.
 const AppContext = createContext();
@@ -29,10 +30,30 @@ export const ContextProvider = (props) => {
         } else {
             setCarrito([...carrito, producto]);
         }
+        toast.success("Producto agregado correctamente", {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
     };
 
     const limpiarCarrito = () => {
         setCarrito([]);
+    };
+
+    const actualizarCantidad = (id, nuevaCantidad) => {
+        setCarrito(
+            carrito.map((item) => (item.id === id ? { ...item, cantidad: nuevaCantidad } : item))
+        );
+    };
+
+    const eliminarDelCarrito = (id) => {
+        setCarrito(carrito.filter((item) => item.id !== id));
     };
 
     // Cantidad de productos
@@ -43,7 +64,14 @@ export const ContextProvider = (props) => {
 
     // 3.
     return (
-        <AppContext.Provider value={{ carrito, agregarAlCarrito, limpiarCarrito }}>
+        <AppContext.Provider
+            value={{
+                carrito,
+                agregarAlCarrito,
+                limpiarCarrito,
+                actualizarCantidad,
+                eliminarDelCarrito,
+            }}>
             {props.children}
         </AppContext.Provider>
     );

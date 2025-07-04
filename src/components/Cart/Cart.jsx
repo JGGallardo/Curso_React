@@ -37,7 +37,7 @@ function Cart() {
 
     return (
         <div className="cart-container">
-            <h2 className="cart-title">Shopping Cart</h2>
+            <h2 className="cart-title">Carrito</h2>
             {carrito.length === 0 ? (
                 <p>El carrito está vacío.</p>
             ) : (
@@ -55,7 +55,7 @@ function Cart() {
                                     <button
                                         className="cart-remove-btn"
                                         onClick={() => eliminarDelCarrito(item.id)}>
-                                        Remove
+                                        Eliminar
                                     </button>
                                     <Contador
                                         cantidad={item.cantidad}
@@ -72,7 +72,7 @@ function Cart() {
                             Total: <span className="cart-total">${total.toFixed(2)}</span>
                         </h3>
                         <button className="checkout-btn" onClick={() => setCheckout(true)}>
-                            Checkout
+                            Comprar
                         </button>
                         <button className="cart-clear-btn" onClick={limpiarCarrito}>
                             Vaciar carrito

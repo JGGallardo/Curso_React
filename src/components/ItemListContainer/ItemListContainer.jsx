@@ -1,6 +1,5 @@
 import "./ItemListContainer.css";
 import Item from "../Item/Item.jsx";
-// import getProducts from "../../services/mockService";
 import { useState, useEffect } from "react";
 import Loader from "../Loader/Loader.jsx";
 import { useNavigate, useParams } from "react-router";

@@ -1,7 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import "./ItemDetail.css";
 import { useEffect, useState } from "react";
-import getProducts from "../../services/mockService";
+import { db } from "../../firebaseConfig";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import Loader from "../Loader/Loader";
 import Contador from "../Contador/Contador";
 import { useAppContext } from "../../context/context";
@@ -34,15 +35,24 @@ function ItemDetail() {
     }
 
     useEffect(() => {
-        getProducts()
-            .then((result) => {
-                const product = result.find((el) => el.id === id);
-                setProducto(product);
-                setLoading(false);
-            })
-            .catch((err) => {
+        const fetchProducto = async () => {
+            setLoading(true);
+            try {
+                const productosRef = collection(db, "productos");
+                const q = query(productosRef, where("id", "==", id));
+                const querySnapshot = await getDocs(q);
+                if (!querySnapshot.empty) {
+                    setProducto(querySnapshot.docs[0].data());
+                } else {
+                    setProducto(null);
+                }
+            } catch (err) {
                 alert(err);
-            });
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProducto();
     }, [id]);
 
     return loading ? (
@@ -75,11 +85,7 @@ function ItemDetail() {
                 <Link to="/">
                     <button className="card-button">Volver al inicio</button>
                 </Link>
-                <Contador
-                    cantidad={cantidad}
-                    sumarCantidad={sumarCantidad}
-                    restarCantidad={restarCantidad}
-                />
+                <Contador cantidad={cantidad} onChange={setCantidad} />
                 <button className="card-button" onClick={agregarCantidadAlCarrito}>
                     Agregar al carrito
                 </button>
