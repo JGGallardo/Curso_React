@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { showToast } from "../components/Librerias/ToastNotify";
 
 // 1.
 const AppContext = createContext();
@@ -30,16 +31,7 @@ export const ContextProvider = (props) => {
         } else {
             setCarrito([...carrito, producto]);
         }
-        toast.success("Producto agregado correctamente", {
-            position: "top-center",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
+        showToast(`¡${producto.nombre} agregado al carrito!`, "success");
     };
 
     const limpiarCarrito = () => {
@@ -55,12 +47,6 @@ export const ContextProvider = (props) => {
     const eliminarDelCarrito = (id) => {
         setCarrito(carrito.filter((item) => item.id !== id));
     };
-
-    // Cantidad de productos
-    // carrito.reduce((acc,value) => acc += value.cantidad, 0)
-
-    // Precio final
-    // carrito.reduce((acc,value) => acc += (value.cantidad * value.price), 0)
 
     // 3.
     return (

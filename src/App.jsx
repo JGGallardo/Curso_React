@@ -7,12 +7,14 @@ import NotFound from "./components/NotFound/NotFound";
 import { ContextProvider } from "./context/context";
 import Cart from "./components/Cart/Cart";
 import { ToastContainer } from "react-toastify";
+import ToastNotify from "./components/Librerias/ToastNotify";
 
 function App() {
     return (
         <ContextProvider>
             <ToastContainer />
             <NavBar />
+            <ToastNotify />
             <Routes>
                 <Route path="/" element={<ItemListContainer />} />
                 <Route path="/categoria/:categoria" element={<ItemListContainer />} />

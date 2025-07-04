@@ -4,6 +4,7 @@ import { useState } from "react";
 import "./Cart.css";
 import Contador from "../Contador/Contador";
 import FormularioCliente from "./FormularioCliente";
+import { showToast } from "../Librerias/ToastNotify";
 
 function Cart() {
     const { carrito, limpiarCarrito, eliminarDelCarrito, actualizarCantidad } = useAppContext();
@@ -18,8 +19,7 @@ function Cart() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Aquí podrías enviar los datos del formulario
-        alert("¡Gracias por tu compra, " + form.nombre + "!"); // Cambiar por librerias
+        showToast(`¡Gracias por tu compra!`, "success");
         limpiarCarrito();
         setCheckout(false);
     };
