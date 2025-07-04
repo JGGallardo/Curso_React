@@ -2,10 +2,6 @@
 
 Este proyecto es una pagina web de una pizzería local, ubicada en la ciudad de Crespo, Entre Ríos
 
-## Logo
-
-![Logo](.\public\assets\img\image.png)
-
 ## Instalación
 
 Para instalar el proyecto, lo descargamos y luego ejecutamos
