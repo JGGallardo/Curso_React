@@ -1,5 +1,5 @@
 import { useAppContext } from "../../context/context";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Cart.css";
 import Contador from "../Contador/Contador";
@@ -10,6 +10,7 @@ function Cart() {
     const { carrito, limpiarCarrito, eliminarDelCarrito, actualizarCantidad } = useAppContext();
     const [checkout, setCheckout] = useState(false);
     const [form, setForm] = useState({ nombre: "", apellido: "", correo: "", telefono: "" });
+    const navigate = useNavigate();
 
     const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
 
@@ -22,6 +23,7 @@ function Cart() {
         showToast(`¡Gracias por tu compra!`, "success");
         limpiarCarrito();
         setCheckout(false);
+        navigate("/");
     };
 
     if (checkout) {
@@ -72,7 +74,7 @@ function Cart() {
                             Total: <span className="cart-total">${total.toFixed(2)}</span>
                         </h3>
                         <button className="checkout-btn" onClick={() => setCheckout(true)}>
-                            Comprar
+                            Continuar
                         </button>
                         <button className="cart-clear-btn" onClick={limpiarCarrito}>
                             Vaciar carrito

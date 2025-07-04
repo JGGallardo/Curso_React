@@ -10,7 +10,7 @@ export const showToast = (mensaje, tipo = "info", opciones = {}) => {
 const ToastNotify = () => (
     <ToastContainer
         position="top-right"
-        autoClose={1000}
+        autoClose={300}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

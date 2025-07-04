@@ -3,7 +3,7 @@ import React from "react";
 function FormularioCliente({ form, onSubmit, onChange }) {
     return (
         <div className="cart-container">
-            <h2>Datos del Cliente</h2>
+            <h2>Ingresá tus datos</h2>
             <form className="cart-form" onSubmit={onSubmit}>
                 <input
                     type="text"

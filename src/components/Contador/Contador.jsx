@@ -15,12 +15,12 @@ function Contador({ cantidad = 1, onChange }) {
     }
 
     return (
-        <div>
+        <div className="btn-contador">
             <button className="btn btn-secondary" onClick={restarCantidad}>
                 -
             </button>
             <p>{cantidad}</p>
-            <button className="btn btn-secondary" onClick={sumarCantidad}>
+            <button className="btn btn-secondary " onClick={sumarCantidad}>
                 +
             </button>
         </div>

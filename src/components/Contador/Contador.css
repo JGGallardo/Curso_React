@@ -1,0 +1,9 @@
+.btn-contador {
+    display: flex;
+    align-items: center;
+}
+
+p {
+    padding-left: 15px;
+    font-weight: bold;
+}
